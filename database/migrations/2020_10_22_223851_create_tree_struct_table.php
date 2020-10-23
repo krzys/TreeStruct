@@ -15,7 +15,8 @@ class CreateTreeStructTable extends Migration
     {
         Schema::create('tree_struct', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('name');
+            $table->unsignedInteger('parent')->nullable();
         });
     }
 
