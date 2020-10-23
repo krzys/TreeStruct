@@ -18,4 +18,22 @@ class TreeStruct extends Model
     protected $attributes = [
         'parent' => null
     ];
+
+    /**
+     * @return TreeStruct[]
+     */
+    public static function getRoots()
+    {
+        return TreeStruct::whereNull('parent')->orderBy('id')->get();
+    }
+
+    function hasChildren()
+    {
+        return $this->children()->exists();
+    }
+
+    function children()
+    {
+        return $this->hasMany('App\Models\TreeStruct', 'parent', 'id');
+    }
 }
