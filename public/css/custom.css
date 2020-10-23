@@ -1,0 +1,52 @@
+/* Tree Structure View */
+#treestruct ul {
+    margin-left: 20px;
+}
+#treestruct .wtree li {
+    list-style-type: none;
+    margin: 10px 0 10px 10px;
+    position: relative;
+}
+#treestruct .wtree li:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -20px;
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    width: 20px;
+    height: 15px;
+}
+#treestruct .wtree li:after {
+    position: absolute;
+    content: "";
+    top: 5px;
+    left: -20px;
+    border-left: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    width: 20px;
+    height: 100%;
+}
+#treestruct .wtree li:last-child:after {
+    display: none;
+}
+#treestruct .wtree li span {
+    display: block;
+    border: 1px solid #ddd;
+    padding: 10px;
+    color: #888;
+    text-decoration: none;
+}
+#treestruct .wtree li span:hover, #treestruct .wtree li span:focus {
+    background: #eee;
+    color: #000;
+    border: 1px solid #aaa;
+}
+#treestruct .wtree li span:hover + ul li span, #treestruct .wtree li span:focus + ul li span {
+    background: #eee;
+    color: #000;
+    border: 1px solid #aaa;
+}
+#treestruct .wtree li span:hover + ul li:after, #treestruct .wtree li span:hover + ul li:before, #treestruct .wtree li span:focus + ul li:after, #treestruct .wtree li span:focus + ul li:before {
+    border-color: #aaa;
+}
