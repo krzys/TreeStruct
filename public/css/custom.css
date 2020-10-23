@@ -30,19 +30,45 @@
 #treestruct .wtree li:last-child:after {
     display: none;
 }
-#treestruct .wtree li span {
+#treestruct .wtree li span:not(.right) {
     display: block;
     border: 1px solid #ddd;
     padding: 10px;
     color: #888;
     text-decoration: none;
 }
-#treestruct .wtree li span:hover, #treestruct .wtree li span:focus {
+#treestruct .wtree li span.right {
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    padding: 10px;
+}
+#treestruct span.right > i {
+    font-size: 23px;
+    margin: 0 2.5px;
+
+    opacity: 0.65;
+}
+#treestruct span.right > i:hover {
+    opacity: 1;
+    text-shadow: 0 0 1px rosybrown;
+}
+/* add icon */
+#treestruct span.right > i.fa-plus {
+    margin-left: 15px;
+    color: seagreen;
+}
+/* remove icon */
+#treestruct span.right > i.fa-ban {
+    color: darkred;
+}
+#treestruct .wtree li span:not(.right):hover, #treestruct .wtree li span:not(.right):focus {
     background: #eee;
     color: #000;
     border: 1px solid #aaa;
 }
-#treestruct .wtree li span:hover + ul li span, #treestruct .wtree li span:focus + ul li span {
+#treestruct .wtree li span:hover ~ ul li span:not(.right), #treestruct .wtree li span:focus ~ ul li span:not(.right) {
     background: #eee;
     color: #000;
     border: 1px solid #aaa;

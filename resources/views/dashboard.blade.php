@@ -15,7 +15,7 @@
                             <ul class="wtree">
                                 @foreach(\App\Models\TreeStruct::getRoots() as $branch)
                                 <li>
-                                    <span>{{ $branch->name }}</span>
+                                    <span>{{ $branch->name }} <span class="right">@include('partial.tree-item-edit', $branch)</span></span>
                                     @if($branch->hasChildren())
                                         @include('partial.tree-item', $branch)
                                     @endif
