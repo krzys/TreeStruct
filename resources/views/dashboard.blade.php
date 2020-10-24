@@ -14,7 +14,7 @@
                             <h1 class="title">Tree Structure</h1>
                             <ul class="wtree">
                                 @foreach(\App\Models\TreeStruct::getRoots() as $branch)
-                                <li>
+                                <li data-id="{{ $branch->id }}">
                                     <span>{{ $branch->name }} <span class="right">@include('partial.tree-item-edit', $branch)</span></span>
                                     @if($branch->hasChildren())
                                         @include('partial.tree-item', $branch)
