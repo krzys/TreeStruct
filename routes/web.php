@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TreeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -20,6 +21,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resource('/tree', 'TreeController', [
-    'except' => ['create']
+Route::middleware('admin')->resource('/tree', TreeController::class, [
+    'except' => ['create', 'edit']
 ]);

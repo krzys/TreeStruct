@@ -36,4 +36,12 @@ class TreeStruct extends Model
     {
         return $this->hasMany('App\Models\TreeStruct', 'parent', 'id');
     }
+
+    function deleteWithChildren() {
+        foreach ($this->children as $child) {
+            $child->deleteWithChildren();
+        }
+
+        $this->delete();
+    }
 }
