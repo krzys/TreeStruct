@@ -43,11 +43,13 @@ class TreeStruct extends Model
         return $this->hasMany('App\Models\TreeStruct', 'parent', 'id');
     }
 
-    function deleteWithChildren() {
+    function deleteWithChildren()
+    {
+        $status = true;
         foreach ($this->children as $child) {
-            $child->deleteWithChildren();
+            $status = $status && $child->deleteWithChildren();
         }
 
-        $this->delete();
+        return $status && $this->delete();
     }
 }
