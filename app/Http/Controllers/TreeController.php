@@ -58,11 +58,10 @@ class TreeController extends Controller
     public function update(Request $request, $id): \Illuminate\Http\JsonResponse
     {
         $validated = $request->validate([
-            'id' => ['required', 'exists:App\Models\TreeStruct,id'],
             'name' => ['required_without:parent', 'min:1', 'max:255'],
             'parent' => ['required_without:name', 'nullable', 'exists:App\Models\TreeStruct,id']
         ]);
-        $model = TreeStruct::update($validated);
+        $model = TreeStruct::findOrFail($id)->update($validated);
 
         return response()->json($model);
     }
