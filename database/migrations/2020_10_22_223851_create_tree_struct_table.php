@@ -17,7 +17,7 @@ class CreateTreeStructTable extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedInteger('parent')->nullable();
-            $table->unsignedInteger('display_order')->default(0);
+            $table->unsignedInteger('display_order')->default(1);
         });
 
         \Illuminate\Support\Facades\DB::raw('' .
