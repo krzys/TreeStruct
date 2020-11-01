@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class TreeStruct extends Component
@@ -40,6 +41,12 @@ class TreeStruct extends Component
             $this->fullName = $element->getFullName();
             $this->parent = $element->parent;
         }
+    }
+
+    public function move(int $id, int $order)
+    {
+        error_log("CALL change_tree_struct_element_order($id, $order);");
+        error_log(DB::unprepared("CALL change_tree_struct_element_order($id, $order);"));
     }
 
     public function cancel()
