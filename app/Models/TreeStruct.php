@@ -11,6 +11,12 @@ class TreeStruct extends Model
 
     protected $table = 'tree_struct';
 
+    // public $timestamps = false; // PhpStorm treats this as an error
+    public function usesTimestamps()
+    {
+        return false;
+    }
+
     protected $fillable = [
         'name', 'parent'
     ];
