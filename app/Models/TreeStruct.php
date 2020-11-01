@@ -18,11 +18,12 @@ class TreeStruct extends Model
     }
 
     protected $fillable = [
-        'name', 'parent'
+        'name', 'parent', 'display_order'
     ];
 
     protected $attributes = [
-        'parent' => null
+        'parent' => null,
+        'display_order' => 1
     ];
 
     /**
@@ -30,7 +31,7 @@ class TreeStruct extends Model
      */
     public static function getRoots()
     {
-        return TreeStruct::whereNull('parent')->orderBy('id')->get();
+        return TreeStruct::whereNull('parent')->orderBy('display_order')->get();
     }
 
     function hasChildren()
@@ -49,7 +50,8 @@ class TreeStruct extends Model
 
     function children()
     {
-        return $this->hasMany('App\Models\TreeStruct', 'parent', 'id');
+        return $this->hasMany('App\Models\TreeStruct', 'parent', 'id')
+            ->orderBy('display_order');
     }
 
     function deleteWithChildren()
