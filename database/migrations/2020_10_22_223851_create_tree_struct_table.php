@@ -20,7 +20,7 @@ class CreateTreeStructTable extends Migration
             $table->unsignedInteger('display_order')->default(1);
         });
 
-        \Illuminate\Support\Facades\DB::raw('' .
+        \Illuminate\Support\Facades\DB::unprepared('' .
         'DELIMITER ;;
         CREATE PROCEDURE `change_tree_struct_element_order` (IN idx int, IN ord int)
         BEGIN
@@ -44,6 +44,6 @@ class CreateTreeStructTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tree_struct');
-        \Illuminate\Support\Facades\DB::raw('DROP PROCEDURE IF EXISTS `change_tree_struct_element_order`;');
+        \Illuminate\Support\Facades\DB::unprepared('DROP PROCEDURE IF EXISTS `change_tree_struct_element_order`;');
     }
 }
