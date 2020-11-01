@@ -1,8 +1,13 @@
 <div>
     <div id="treestruct">
-        <h1 class="title">Tree Structure</h1>
+        <button wire:click="add(null)" type="button" class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            <i class="fa fa-plus text-white"></i>
+        </button>
         <ul class="wtree">
-            @foreach($roots as $branch)
+            @php
+            $max = count($roots) - 1;
+            @endphp
+            @foreach($roots as $i => $branch)
                 <li data-id="{{ $branch->id }}">
                     <span>{{ $branch->name }} <span class="right">@include('partial.tree-item-edit', $branch)</span></span>
                     @if($branch->hasChildren())
@@ -108,12 +113,12 @@
                             </button>
                             @break
                             @case('add')
-                            <button wire:click="add()" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                            <button wire:click="add()" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                                 Add
                             </button>
                             @break
                             @case('edit')
-                            <button wire:click="edit({{ $element_id }})" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-gray-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                            <button wire:click="edit({{ $element_id }})" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-gray-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-gray-500 focus:outline-none focus:border-gray-700 focus:shadow-outline-gray transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                                 Edit
                             </button>
                             @break

@@ -7,7 +7,7 @@
     margin: 10px 0 10px 10px;
     position: relative;
 }
-#treestruct .wtree li:before {
+#treestruct .wtree li:not(:first-child):before, #treestruct .wtree li li:before {
     content: "";
     position: absolute;
     top: -10px;
