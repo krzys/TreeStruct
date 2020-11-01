@@ -38,6 +38,15 @@ class TreeStruct extends Model
         return $this->children()->exists();
     }
 
+    function getFullName() {
+        $name = $this->name;
+        if($this->parent != null) {
+            $name = TreeStruct::find($this->parent)->getFullName() . ' → ' . $name;
+        }
+
+        return $name;
+    }
+
     function children()
     {
         return $this->hasMany('App\Models\TreeStruct', 'parent', 'id');
