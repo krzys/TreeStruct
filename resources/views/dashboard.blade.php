@@ -10,19 +10,7 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div>
                     <div class="p-6 sm:px-20 bg-white border-b border-gray-200">
-                        <div id="treestruct">
-                            <h1 class="title">Tree Structure</h1>
-                            <ul class="wtree">
-                                @foreach(\App\Models\TreeStruct::getRoots() as $branch)
-                                <li data-id="{{ $branch->id }}">
-                                    <span>{{ $branch->name }} <span class="right">@include('partial.tree-item-edit', $branch)</span></span>
-                                    @if($branch->hasChildren())
-                                        @include('partial.tree-item', $branch)
-                                    @endif
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
+                        @livewire('tree-struct')
                     </div>
                 </div>
             </div>
