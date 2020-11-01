@@ -28,10 +28,11 @@ class CreateTreeStructTable extends Migration
             UPDATE tree_struct SET display_order = ord WHERE id = idx;
 
             SET @row = 0;
-            UPDATE tree_struct as `a` SET display_order = (SELECT r FROM (SELECT (@row:=@row+1) as r, id FROM tree_struct WHERE parent = @parent ORDER BY display_order) as `b` WHERE b.id = a.id) WHERE parent = @parent AND id != idx;
+            UPDATE tree_struct as `a` SET display_order = (SELECT r FROM (SELECT (@row:=@row+1) as r, id FROM tree_struct WHERE ((@parent is null and parent is null) OR parent = @parent) ORDER BY display_order) as `b` WHERE b.id = a.id) WHERE ((@parent is null and parent is null) OR parent = @parent) AND id != idx;
 
             SET @duplicatedId = (SELECT id FROM tree_struct WHERE display_order = ord AND id != idx LIMIT 1);
-            UPDATE tree_struct SET display_order = ord + 1 WHERE id = @duplicatedId;
+            SET @count = (SELECT COUNT(*) FROM tree_struct WHERE (@parent is null and parent is null) or parent = @parent);
+            UPDATE tree_struct SET display_order = (CASE WHEN @count = ord THEN ord - 1 ELSE ord + 1 END) WHERE id = @duplicatedId;
         END;;
         DELIMITER ;');
     }
