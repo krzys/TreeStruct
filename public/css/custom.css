@@ -57,11 +57,6 @@
 /* add icon */
 #treestruct span.right > i.fa-plus {
     margin-left: 15px;
-    color: seagreen;
-}
-/* remove icon */
-#treestruct span.right > i.fa-ban {
-    color: darkred;
 }
 #treestruct .wtree li span:not(.right):hover, #treestruct .wtree li span:not(.right):focus {
     background: #eee;
