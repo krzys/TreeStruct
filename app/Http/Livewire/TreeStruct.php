@@ -22,6 +22,7 @@ class TreeStruct extends Component
     private function resetInputFields(){
         $this->name = '';
         $this->parent = null;
+        $this->resetErrorBag();
     }
 
     public function checkIfValid()
