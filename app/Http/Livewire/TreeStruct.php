@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
 class TreeStruct extends Component
@@ -23,15 +24,30 @@ class TreeStruct extends Component
         $this->parent = null;
     }
 
+    public function checkIfValid()
+    {
+        $validator = Validator::make([
+            'name' => $this->name,
+            'parent' => $this->parent
+        ], [
+            'name' => ['required', 'min:1', 'max:255'],
+            'parent' => ['exists:App\Models\TreeStruct,id', 'nullable']
+        ])->validate();
+
+        return !$validator->fails();
+    }
+
     public function edit($id)
     {
         if($this->mode == 'edit') {
-            $element = \App\Models\TreeStruct::find($id);
-            $element->name = $this->name;
-            $element->parent = $this->parent;
-            $element->save();
+            if($this->checkIfValid()) {
+                $element = \App\Models\TreeStruct::find($id);
+                $element->name = $this->name;
+                $element->parent = $this->parent;
+                $element->save();
 
-            $this->cancel();
+                $this->cancel();
+            }
         } else {
             $this->mode = 'edit';
 
@@ -45,8 +61,7 @@ class TreeStruct extends Component
 
     public function move(int $id, int $order)
     {
-        error_log("CALL change_tree_struct_element_order($id, $order);");
-        error_log(DB::unprepared("CALL change_tree_struct_element_order($id, $order);"));
+        DB::unprepared("CALL change_tree_struct_element_order($id, $order);");
     }
 
     public function cancel()
@@ -58,12 +73,14 @@ class TreeStruct extends Component
     public function add($parent = null)
     {
         if($this->mode == 'add') {
-            $element = new \App\Models\TreeStruct;
-            $element->name = $this->name;
-            $element->parent = $this->parent ?: null;
-            $element->save();
+            if($this->checkIfValid()) {
+                $element = new \App\Models\TreeStruct;
+                $element->name = $this->name;
+                $element->parent = $this->parent ?: null;
+                $element->save();
 
-            $this->cancel();
+                $this->cancel();
+            }
         } else {
             $this->mode = 'add';
             $this->parent = $parent;
