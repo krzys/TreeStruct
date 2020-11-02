@@ -1,8 +1,10 @@
 <div>
     <div id="treestruct">
+        @if(Auth::user()->isAdmin())
         <button wire:click="add(null)" type="button" class="inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
             <i class="fa fa-plus text-white"></i>
         </button>
+        @endif
         <ul class="wtree">
             @php
             $max = count($roots) - 1;
@@ -17,6 +19,7 @@
             @endforeach
         </ul>
     </div>
+    @if(Auth::user()->isAdmin())
     <div class="@if($mode == null)hidden @endif fixed z-10 inset-0 overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
@@ -133,4 +136,5 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
